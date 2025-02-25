@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1.2
-
 # Base image
 FROM python:3.10-slim
 
@@ -22,11 +20,9 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 # Install marimo notebook environment
 WORKDIR /marimo
-RUN --mount=type=cache,target=/root/.cache/uv \
-    uv venv --no-project .venv
+RUN uv venv --no-project --no-cache .venv
 COPY requirements.txt .
-RUN --mount=type=cache,target=/root/.cache/uv \
-    uv pip install -r requirements.txt
+RUN uv pip install --no-cache  -r requirements.txt
 
 WORKDIR /marimo/workdir
 COPY .marimo.toml .

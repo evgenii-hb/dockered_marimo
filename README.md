@@ -13,7 +13,7 @@ uv add <package_name>
 uv pip compile pyproject.toml -o requirements.txt
 
 # Build Docker image
-DOCKER_BUILDKIT=1 docker build -t marimo:local .
+docker build -t marimo:local .
 
 # Run marimo in Docker locally
 docker run -v .:/marimo/workdir --rm -p 8055:8055 marimo:local
